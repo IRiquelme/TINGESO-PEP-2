@@ -1,0 +1,3 @@
+INSERT INTO student (rut, names, last_names, date_birth, school_type, school_name, years_since_graduation) VALUES ('1-9', 'Juan Ignacio', 'Pérez Tapia', '2000-01-01', 'Privado', 'Colegio XYZ', '< 1');
+INSERT INTO student (rut, names, last_names, date_birth, school_type, school_name, years_since_graduation) VALUES ('11-6', 'María Belen', 'González González', '1999-02-15', 'Subvencionado', 'Escuela ABC', '4');
+INSERT INTO student (rut, names, last_names, date_birth, school_type, school_name, years_since_graduation) VALUES ('16-7', 'Martín Alejandro', 'Valenzuela Pérez', '2001-05-21', 'Municipal', 'Liceo José Victorino Lastarria', '1');

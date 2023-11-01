@@ -1,0 +1,22 @@
+spring:
+  devtools:
+    restart:
+      aditional-paths: src/main/java
+  application:
+    name: student-service
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    plataform: postgres
+    driver-class-name: org.postgresql.Driver
+    dbname: student_db
+    url: jdbc:postgresql://localhost:5432/student_db
+    username: postgres
+    password: adm123
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
