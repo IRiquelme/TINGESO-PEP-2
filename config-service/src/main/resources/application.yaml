@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/IRiquelme/TINGESO-PEP-2
+          search-paths: "/config-data"
+          username: IRiquelme
+          password: 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
