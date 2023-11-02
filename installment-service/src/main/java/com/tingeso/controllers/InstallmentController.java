@@ -39,6 +39,39 @@ public class InstallmentController {
         return ResponseEntity.ok(listOfInstallments);
     }
 
+    @GetMapping("/{rut}/unpaid")
+    public ResponseEntity<?> getUnpaidInstallmentsByRut(@PathVariable String rut){
+        List<InstallmentEntity> listOfInstallments = installmentService.getUnpaidInstallmentsByRut(rut);
+        if (listOfInstallments.isEmpty()){
+            return ResponseEntity
+                    .status(404)
+                    .body(null);
+        }
+        return ResponseEntity.ok(listOfInstallments);
+    }
+
+    @GetMapping("/{rut}/paid")
+    public ResponseEntity<?> getPaidInstallmentsByRut(@PathVariable String rut){
+        List<InstallmentEntity> listOfInstallments = installmentService.getPaidInstallmentsByRut(rut);
+        if (listOfInstallments.isEmpty()){
+            return ResponseEntity
+                    .status(404)
+                    .body(null);
+        }
+        return ResponseEntity.ok(listOfInstallments);
+    }
+
+    @GetMapping("/{rut}/late")
+    public ResponseEntity<?> getLateInstallmentsByRut(@PathVariable String rut){
+        List<InstallmentEntity> listOfInstallments = installmentService.getLateInstallmentsByRut(rut);
+        if (listOfInstallments.isEmpty()){
+            return ResponseEntity
+                    .status(404)
+                    .body(null);
+        }
+        return ResponseEntity.ok(listOfInstallments);
+    }
+
     @PostMapping
     public ResponseEntity<String> installmentGenerate(@PathVariable String rut, @PathVariable String numberOfInstallments) {
         installmentService.generateStudentInstallments(rut, numberOfInstallments);

@@ -3,7 +3,7 @@ spring:
     restart:
       aditional-paths: src/main/java
   application:
-    name: report-service
+    name: administration-service
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -12,8 +12,8 @@ spring:
   datasource:
     plataform: postgres
     driver-class-name: org.postgresql.Driver
-    dbname: report_db
-    url: jdbc:postgresql://localhost:5432/report_db
+    dbname: administration_db
+    url: jdbc:postgresql://localhost:5432/administration_db
     username: postgres
     password: adm123
   cloud:

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tingeso</groupId>
-	<artifactId>report-service</artifactId>
+	<artifactId>administration-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>report-service</name>
-	<description>Report Service</description>
+	<name>administration-service</name>
+	<description>Administration Service</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>
