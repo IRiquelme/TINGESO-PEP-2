@@ -25,11 +25,7 @@ public class InstallmentService {
     RestTemplate restTemplate;
 
     private StudentModel restGetStudent(String rut) {
-        ResponseEntity<StudentModel> response = restTemplate.exchange(
-                "http://localhost:8080/student/" + rut, HttpMethod.GET,
-                null,
-                StudentModel.class);
-        return response.getBody();
+        return restTemplate.getForObject("http://installment-service/" + rut, StudentModel.class);
     }
 
     public InstallmentEntity markInstallmentAsPaid(long id) {
