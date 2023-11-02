@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class AdministrationService {
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
         return restTemplate.getForObject("http://installment-service/" + rut + "/unpaid", List.class);
     }
+
     public String uploadExam(MultipartFile exam) {
         return examService.upload(exam);
     }
@@ -42,7 +44,8 @@ public class AdministrationService {
     }
 
     public List<ReportEntity> createReport() {
-        return reportService.createReport();
+        List<StudentModel> studentList = restGetStudents();
+        return reportService.createReport(studentList);
     }
     public String updateInstallments() {
         List<StudentModel> students = restGetStudents();

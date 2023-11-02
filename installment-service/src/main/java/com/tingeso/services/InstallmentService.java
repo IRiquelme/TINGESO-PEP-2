@@ -132,4 +132,17 @@ public class InstallmentService {
     public List<InstallmentEntity> getLateInstallmentsByRut(String rut) {
         return installmentRepository.findLateinstallments(rut);
     }
+
+    public String getPaymentType(String rut) {
+        int numberOfInstallments = installmentRepository.findByRut(rut).size();
+        if (numberOfInstallments == 1) {
+            return "CONTADO";
+        } else {
+            return "CUOTAS";
+        }
+    }
+
+    public InstallmentEntity getLastPaidInstallment(String rut) {
+        return installmentRepository.findLastPaidInstallment(rut);
+    }
 }

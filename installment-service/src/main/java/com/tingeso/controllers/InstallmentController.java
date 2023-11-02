@@ -4,10 +4,8 @@ import com.tingeso.entities.InstallmentEntity;
 import com.tingeso.services.InstallmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -70,6 +68,28 @@ public class InstallmentController {
                     .body(null);
         }
         return ResponseEntity.ok(listOfInstallments);
+    }
+
+    @GetMapping("/{rut}/last")
+    public ResponseEntity<?> getLastPaidInstallment(@PathVariable String rut){
+        InstallmentEntity installment = installmentService.getLastPaidInstallment(rut);
+        if (installment == null){
+            return ResponseEntity
+                    .status(404)
+                    .body(null);
+        }
+        return ResponseEntity.ok(installment);
+    }
+
+    @GetMapping("/{rut}/payment")
+    public ResponseEntity<String> getPaymentType (@PathVariable String rut){
+        String paymentType = installmentService.getPaymentType(rut);
+        if (paymentType == null){
+            return ResponseEntity
+                    .status(404)
+                    .body(null);
+        }
+        return ResponseEntity.ok(paymentType);
     }
 
     @PostMapping
