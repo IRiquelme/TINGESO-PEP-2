@@ -24,15 +24,16 @@ public class AdministrationService {
     RestTemplate restTemplate;
 
     private List<StudentModel> restGetStudents() {
+        System.out.println("Getting students");
         return restTemplate.getForObject("http://student-service/student", List.class);
     }
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut, List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut, List.class);
     }
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/unpaid", List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/unpaid", List.class);
     }
 
     public String uploadExam(MultipartFile exam) {

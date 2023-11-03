@@ -22,31 +22,31 @@ public class ReportService {
     RestTemplate restTemplate;
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut, List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut, List.class);
     }
     private List<InstallmentModel> restGetPaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/paid", List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/paid", List.class);
     }
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/unpaid", List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/unpaid", List.class);
     }
 
     private List<InstallmentModel> restGetLateInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/late", List.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/late", List.class);
     }
 
     private InstallmentModel restGetLastPaidInstallment (String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/last", InstallmentModel.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/last", InstallmentModel.class);
     }
 
     private String restGetPaymentType (String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut + "/payment", String.class);
+        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/payment", String.class);
     }
 
     public List<ReportEntity> createReport(List<StudentModel> studentList){
         reportRepository.deleteAll();
-        studentList.forEach(this::createStudentReport);
+        studentList.forEach(studentModel -> createStudentReport(studentModel));
         return (List<ReportEntity>) reportRepository.findAll();
     }
 

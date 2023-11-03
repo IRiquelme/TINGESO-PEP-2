@@ -11,9 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class InstallmentService {
@@ -25,7 +23,9 @@ public class InstallmentService {
     RestTemplate restTemplate;
 
     private StudentModel restGetStudent(String rut) {
-        return restTemplate.getForObject("http://installment-service/" + rut, StudentModel.class);
+        //return restTemplate.getForObject("http://student-service/student/" + rut, StudentModel.class);
+        ResponseEntity<StudentModel> response = restTemplate.exchange("http://student-service/student/" + rut, HttpMethod.GET, null, StudentModel.class);
+        return  response.getBody();
     }
 
     public InstallmentEntity markInstallmentAsPaid(long id) {

@@ -92,7 +92,7 @@ public class InstallmentController {
         return ResponseEntity.ok(paymentType);
     }
 
-    @PostMapping
+    @PostMapping("{rut}/{numberOfInstallments}")
     public ResponseEntity<String> installmentGenerate(@PathVariable String rut, @PathVariable String numberOfInstallments) {
         installmentService.generateStudentInstallments(rut, numberOfInstallments);
         return ResponseEntity.ok("Cuotas generadas");
