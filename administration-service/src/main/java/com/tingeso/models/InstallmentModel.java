@@ -1,4 +1,4 @@
-package com.tingeso.model;
+package com.tingeso.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

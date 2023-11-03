@@ -2,14 +2,18 @@ package com.tingeso.services;
 
 import com.tingeso.entities.ExamEntity;
 import com.tingeso.entities.ReportEntity;
-import com.tingeso.model.InstallmentModel;
-import com.tingeso.model.StudentModel;
+import com.tingeso.models.InstallmentModel;
+import com.tingeso.models.StudentModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,16 +28,31 @@ public class AdministrationService {
     RestTemplate restTemplate;
 
     private List<StudentModel> restGetStudents() {
-        System.out.println("Getting students");
-        return restTemplate.getForObject("http://student-service/student", List.class);
+        return restTemplate.exchange(
+                "http://student-service/student",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<StudentModel>>() {}
+        ).getBody();
     }
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut, List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
 
+
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/unpaid", List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut + "/unpaid",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
 
     public String uploadExam(MultipartFile exam) {
@@ -60,7 +79,7 @@ public class AdministrationService {
                     installment.setAmount(newAmount);
                 }
             });
-            restTemplate.postForObject("http://installment-service/update", studentInstallments, String.class);
+            restTemplate.postForObject("http://installment-service/installment/update", studentInstallments, String.class);
         });
         return "Cuotas actualizadas";
     }

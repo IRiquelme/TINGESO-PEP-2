@@ -16,7 +16,7 @@ public interface InstallmentRepository extends CrudRepository<InstallmentEntity,
     @Query(value = "SELECT * FROM installment WHERE installment.rut = :rut ORDER BY installment.installment_number", nativeQuery = true)
     ArrayList<InstallmentEntity> findByRut(@Param("rut") String rut);
 
-    @Query(value = "SELECT * FROM installment WHERE installment.rut = :rut AND installment.installmentNumber = :installmentNumber", nativeQuery = true)
+    @Query(value = "SELECT * FROM installment WHERE installment.rut = :rut AND installment.installment_number = :installmentNumber", nativeQuery = true)
     InstallmentEntity findByRutAndNumber(@Param("rut") String rut, @Param("installmentNumber") Integer installmentNumber);
 
     @Query(value = "SELECT * FROM installment WHERE installment.rut = :rut AND installment.status = 'PENDIENTE'  AND installment.expiration_date < CURRENT_DATE", nativeQuery = true)

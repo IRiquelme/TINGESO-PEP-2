@@ -1,4 +1,4 @@
-package com.tingeso.model;
+package com.tingeso.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentModel {
-
     private String rut;
     private String names;
     private String lastNames;

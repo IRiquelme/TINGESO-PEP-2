@@ -18,77 +18,42 @@ public class InstallmentController {
     @GetMapping
     public ResponseEntity<?> getAllInstallments() {
         List<InstallmentEntity> installments = installmentService.getAllInstallments();
-        if (installments.isEmpty()){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(installments);
     }
 
     @GetMapping("/{rut}")
     public ResponseEntity<?> getInstallmentsByRut(@PathVariable String rut){
         List<InstallmentEntity> listOfInstallments = installmentService.getInstallmentsByRut(rut);
-        if (listOfInstallments.isEmpty()){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(listOfInstallments);
     }
 
     @GetMapping("/{rut}/unpaid")
     public ResponseEntity<?> getUnpaidInstallmentsByRut(@PathVariable String rut){
         List<InstallmentEntity> listOfInstallments = installmentService.getUnpaidInstallmentsByRut(rut);
-        if (listOfInstallments.isEmpty()){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(listOfInstallments);
     }
 
     @GetMapping("/{rut}/paid")
     public ResponseEntity<?> getPaidInstallmentsByRut(@PathVariable String rut){
         List<InstallmentEntity> listOfInstallments = installmentService.getPaidInstallmentsByRut(rut);
-        if (listOfInstallments.isEmpty()){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(listOfInstallments);
     }
 
     @GetMapping("/{rut}/late")
     public ResponseEntity<?> getLateInstallmentsByRut(@PathVariable String rut){
         List<InstallmentEntity> listOfInstallments = installmentService.getLateInstallmentsByRut(rut);
-        if (listOfInstallments.isEmpty()){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(listOfInstallments);
     }
 
     @GetMapping("/{rut}/last")
     public ResponseEntity<?> getLastPaidInstallment(@PathVariable String rut){
         InstallmentEntity installment = installmentService.getLastPaidInstallment(rut);
-        if (installment == null){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(installment);
     }
 
     @GetMapping("/{rut}/payment")
     public ResponseEntity<String> getPaymentType (@PathVariable String rut){
         String paymentType = installmentService.getPaymentType(rut);
-        if (paymentType == null){
-            return ResponseEntity
-                    .status(404)
-                    .body(null);
-        }
         return ResponseEntity.ok(paymentType);
     }
 

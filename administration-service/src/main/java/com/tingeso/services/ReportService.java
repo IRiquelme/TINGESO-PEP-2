@@ -1,13 +1,17 @@
 package com.tingeso.services;
 
 import com.tingeso.entities.ReportEntity;
-import com.tingeso.model.InstallmentModel;
-import com.tingeso.model.StudentModel;
+import com.tingeso.models.InstallmentModel;
+import com.tingeso.models.StudentModel;
 import com.tingeso.repositories.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,22 +26,47 @@ public class ReportService {
     RestTemplate restTemplate;
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut, List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
+
     private List<InstallmentModel> restGetPaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/paid", List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut + "/paid",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/unpaid", List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut + "/unpaid",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
 
     private List<InstallmentModel> restGetLateInstallment(String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/late", List.class);
+        return restTemplate.exchange(
+                "http://installment-service/installment/" + rut + "/late",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<InstallmentModel>>() {}
+        ).getBody();
     }
 
-    private InstallmentModel restGetLastPaidInstallment (String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/last", InstallmentModel.class);
+    private LocalDate restGetLastPaidInstallment (String rut) {
+        InstallmentModel installment = restTemplate.getForObject("http://installment-service/installment/" + rut + "/last", InstallmentModel.class);
+        if (installment != null) {
+            return installment.getPayDate();
+        }
+        return null;
     }
 
     private String restGetPaymentType (String rut) {
@@ -46,7 +75,7 @@ public class ReportService {
 
     public List<ReportEntity> createReport(List<StudentModel> studentList){
         reportRepository.deleteAll();
-        studentList.forEach(studentModel -> createStudentReport(studentModel));
+        studentList.forEach(this::createStudentReport);
         return (List<ReportEntity>) reportRepository.findAll();
     }
 
@@ -61,7 +90,7 @@ public class ReportService {
         studentReport.setNumberOfInstallments(restGetInstallmentsByRut(student.getRut()).size());
         studentReport.setNumberOfPaidInstallments(restGetPaidInstallment(student.getRut()).size());
         studentReport.setTotalPaidAmount(restGetPaidInstallment(student.getRut()).stream().mapToInt(InstallmentModel::getAmount).sum());
-        studentReport.setLastPaymentDate(restGetLastPaidInstallment(student.getRut()).getPayDate());
+        studentReport.setLastPaymentDate(restGetLastPaidInstallment(student.getRut()));
         studentReport.setRemainingAmount(restGetUnpaidInstallment(student.getRut()).stream().mapToInt(InstallmentModel::getAmount).sum());
         studentReport.setNumberOfLateInstallments(restGetLateInstallment(student.getRut()).size());
         reportRepository.save(studentReport);

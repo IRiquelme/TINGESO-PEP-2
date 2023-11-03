@@ -23,9 +23,11 @@ public class InstallmentService {
     RestTemplate restTemplate;
 
     private StudentModel restGetStudent(String rut) {
-        //return restTemplate.getForObject("http://student-service/student/" + rut, StudentModel.class);
-        ResponseEntity<StudentModel> response = restTemplate.exchange("http://student-service/student/" + rut, HttpMethod.GET, null, StudentModel.class);
-        return  response.getBody();
+        return restTemplate.exchange("http://student-service/student/" + rut,
+                HttpMethod.GET,
+                null,
+                StudentModel.class)
+                .getBody();
     }
 
     public InstallmentEntity markInstallmentAsPaid(long id) {
@@ -111,6 +113,7 @@ public class InstallmentService {
 
     public void updateInstallments(List<InstallmentEntity> installments) {
         installments.forEach(installment -> {
+            System.out.println(installment);
             InstallmentEntity oldInstallment = installmentRepository.findByRutAndNumber(installment.getRut(), installment.getInstallmentNumber());
             oldInstallment.setAmount(installment.getAmount());
             installmentRepository.save(oldInstallment);
