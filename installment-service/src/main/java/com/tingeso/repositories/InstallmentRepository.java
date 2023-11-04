@@ -39,4 +39,7 @@ public interface InstallmentRepository extends CrudRepository<InstallmentEntity,
 
     @Query(value = "SELECT SUM(amount) FROM installment WHERE rut = :rut AND installment.status = 'PENDIENTE'", nativeQuery = true)
     Integer remainingAmount(String rut);
+
+    @Query(value = "DELETE FROM installment WHERE rut = :rut", nativeQuery = true)
+    void deleteAllByRut(String rut);
 }

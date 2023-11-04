@@ -43,10 +43,9 @@ public class StudentController {
 
         if (response == null) {
             return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("El RUT ingresado ya esta registrado.");
+                    .ok(-1);
         }
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(1);
     }
 }

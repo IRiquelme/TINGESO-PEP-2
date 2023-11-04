@@ -38,6 +38,7 @@ public class InstallmentService {
     }
 
     public void generateStudentInstallments(String rut, String numberOfInstallments) {
+        //deleteAllInstallmentsByRut(rut);
         StudentModel student = restGetStudent(rut);
         LocalDate date = LocalDate.now();
         int totalAmount = 1500000;
@@ -54,6 +55,10 @@ public class InstallmentService {
                 createInstallment(rut, i, "PENDIENTE", date, nextExpirationDate(date), amountPerInstallment);
             }
         }
+    }
+
+    private void deleteAllInstallmentsByRut(String rut) {
+        installmentRepository.deleteAllByRut(rut);
     }
 
     public ArrayList<InstallmentEntity> getInstallmentsByRut(String rut) {
@@ -100,7 +105,7 @@ public class InstallmentService {
         double totalAmount = 1500000;
 
         return switch (years) {
-            case "< 1" -> totalAmount * 0.15;
+            case "0" -> totalAmount * 0.15;
             case "1", "2" -> totalAmount * 0.08;
             case "3", "4" -> totalAmount * 0.04;
             default -> 0;

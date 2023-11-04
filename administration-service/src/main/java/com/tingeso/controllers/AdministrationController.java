@@ -38,7 +38,7 @@ public class AdministrationController {
         return ResponseEntity.ok().body(examList);
     }
 
-    @GetMapping("/report")
+    @PostMapping("/report")
     public ResponseEntity<?> report(){
         List<ReportEntity> report = administrationService.createReport();
         if (report.isEmpty()){
