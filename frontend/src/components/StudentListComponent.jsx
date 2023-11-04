@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import StudentService from "../services/StudentService";
 import NavbarComponent from "./others-components/NavbarComponent";
 import { useNavigate } from "react-router-dom";
+import "../styles/list.css";
 
 export default function StudentListComponent() {
   const [students, setStudents] = useState([]);

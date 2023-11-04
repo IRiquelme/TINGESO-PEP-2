@@ -1,4 +1,4 @@
-package com.tingeso.entities;
+package com.tingeso.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,17 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "report")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReportEntity {
+public class ReportModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
     private String rut;
     private String studentName;
     private Integer examsCount;

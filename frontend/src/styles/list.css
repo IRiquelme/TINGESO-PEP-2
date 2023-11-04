@@ -1,0 +1,11 @@
+th, td, tr{
+    text-align: center;
+}
+
+td{
+    white-space: nowrap;
+}
+
+.no-center {
+    text-align: left;
+}

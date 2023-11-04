@@ -1,23 +1,20 @@
 package com.tingeso.services;
 
-import com.tingeso.entities.ReportEntity;
+import com.tingeso.models.ReportModel;
 import com.tingeso.models.InstallmentModel;
 import com.tingeso.models.StudentModel;
-import com.tingeso.repositories.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ReportService {
-    @Autowired
-    ReportRepository reportRepository;
 
     @Autowired
     ExamService examService;
@@ -73,14 +70,18 @@ public class ReportService {
         return restTemplate.getForObject("http://installment-service/installment/" + rut + "/payment", String.class);
     }
 
-    public List<ReportEntity> createReport(List<StudentModel> studentList){
-        reportRepository.deleteAll();
-        studentList.forEach(this::createStudentReport);
-        return (List<ReportEntity>) reportRepository.findAll();
+    public List<ReportModel> createReport(List<StudentModel> studentList){
+        List<ReportModel> reporList = new ArrayList<ReportModel>();
+        studentList.forEach(
+                studentModel -> {
+                    reporList.add(createStudentReport(studentModel));
+                }
+        );
+        return reporList;
     }
 
-    private void createStudentReport(StudentModel student){
-        ReportEntity studentReport = new ReportEntity();
+    private ReportModel createStudentReport(StudentModel student){
+        ReportModel studentReport = new ReportModel();
         studentReport.setRut(student.getRut());
         studentReport.setStudentName(student.getNames()+" "+student.getLastNames());
         studentReport.setExamsCount(examService.getExamCountForStudent(student.getRut()));
@@ -93,6 +94,6 @@ public class ReportService {
         studentReport.setLastPaymentDate(restGetLastPaidInstallment(student.getRut()));
         studentReport.setRemainingAmount(restGetUnpaidInstallment(student.getRut()).stream().mapToInt(InstallmentModel::getAmount).sum());
         studentReport.setNumberOfLateInstallments(restGetLateInstallment(student.getRut()).size());
-        reportRepository.save(studentReport);
+        return studentReport;
     }
 }

@@ -17,16 +17,18 @@ function NavbarComponent() {
     return (
         <div>
             <nav className="nav">
-                <div>
+                <div className='left'>
                     <a onClick={handleClickMenu}>Menú</a>
                     <a onClick={handleClickStudentList}>Listar estudiantes</a>
                 </div>
-                <div>
-                    <h1>TopEducation</h1>
+                <div className='right'>
+                    <a onClick={handleClickMenu}>
+                        <h2>TopEducation</h2>
+                    </a>
                 </div>
+
             </nav>
         </div>
     );
 }
-
 export default NavbarComponent;

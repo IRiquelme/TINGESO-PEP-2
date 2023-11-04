@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import NavbarComponent from "./others-components/NavbarComponent";
-import "../styles/menu.css";
 import { useNavigate } from "react-router-dom";
 import AdministrationService from "../services/AdministrationService";
+import "../styles/menu.css";
 
 export default function MenuComponent() {
   const navigate = useNavigate();
@@ -18,10 +18,17 @@ export default function MenuComponent() {
     });
   };
 
+  const handleClickExam = () => {
+    navigate("/exam-upload");
+  };
+
+  const handleClickReport = () => {
+    navigate("/report-list");
+  }
   return (
     <div>
       <NavbarComponent />
-      <body>
+      <body className="menu">
         <ul>
           <li>
             <a className="boton ingresar" href="/student-register">
@@ -34,8 +41,8 @@ export default function MenuComponent() {
             </a>
           </li>
           <li>
-            <a className="boton archivo" href="/exam">
-              Subir archivo de resultados
+            <a className="boton archivo" onClick={handleClickExam}>
+              Subir resultados de examen
             </a>
           </li>
           <li>
@@ -44,7 +51,7 @@ export default function MenuComponent() {
             </a>
           </li>
           <li>
-            <a className="boton resumen" href="/summary">
+            <a className="resumen boton" onClick={handleClickReport}>
               Generar reporte de estados de pago
             </a>
           </li>

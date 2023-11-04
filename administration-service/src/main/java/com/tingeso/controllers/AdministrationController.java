@@ -1,7 +1,7 @@
 package com.tingeso.controllers;
 
 import com.tingeso.entities.ExamEntity;
-import com.tingeso.entities.ReportEntity;
+import com.tingeso.models.ReportModel;
 import com.tingeso.services.AdministrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,14 +33,14 @@ public class AdministrationController {
     public ResponseEntity<List<ExamEntity>> examList(Model model){
         List<ExamEntity> examList = administrationService.getLastExamRows();
         if (examList.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.ok().body(examList);
     }
 
     @PostMapping("/report")
     public ResponseEntity<?> report(){
-        List<ReportEntity> report = administrationService.createReport();
+        List<ReportModel> report = administrationService.createReport();
         if (report.isEmpty()){
             return ResponseEntity.notFound().build();
         }

@@ -7,6 +7,7 @@ import StudentListComponent from './components/StudentListComponent';
 import StudentRegisterComponent from './components/StudentRegisterComponent';
 import InstallmentListComponent from './components/InstallmentListComponent';
 import InstallmentGenerateComponent from './components/InstallmentGenerateComponent';
+import ReporListComponent from './components/ReportListComponent';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/student-register" element={<StudentRegisterComponent />} />
           <Route path="/installment-list" element={<InstallmentListComponent />} />
           <Route path="/installment-generate" element={<InstallmentGenerateComponent />} />
+          <Route path="/report-list" element={<ReporListComponent />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,19 +1,16 @@
 package com.tingeso.services;
 
 import com.tingeso.entities.ExamEntity;
-import com.tingeso.entities.ReportEntity;
+import com.tingeso.models.ReportModel;
 import com.tingeso.models.InstallmentModel;
 import com.tingeso.models.StudentModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -63,10 +60,11 @@ public class AdministrationService {
         return examService.getLastExamRows();
     }
 
-    public List<ReportEntity> createReport() {
+    public List<ReportModel> createReport() {
         List<StudentModel> studentList = restGetStudents();
         return reportService.createReport(studentList);
     }
+
     public String updateInstallments() {
         List<StudentModel> students = restGetStudents();
         students.forEach(student -> {
