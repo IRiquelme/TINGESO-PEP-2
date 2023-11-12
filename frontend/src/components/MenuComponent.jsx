@@ -28,7 +28,7 @@ export default function MenuComponent() {
   return (
     <div>
       <NavbarComponent />
-      <body className="menu">
+      <div className="menu">
         <ul>
           <li>
             <a className="boton ingresar" href="/student-register">
@@ -56,7 +56,7 @@ export default function MenuComponent() {
             </a>
           </li>
         </ul>
-      </body>
+      </div>
     </div>
   );
 }
