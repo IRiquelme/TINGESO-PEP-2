@@ -45,7 +45,12 @@ public class ExamService {
     }
 
     public ArrayList<ExamEntity> getLastExamRows(){
-        return examRepository.findLastExam();
+        // verificar que exista un examen
+        ArrayList<ExamEntity> lastExam = examRepository.findLastExam();
+        if (lastExam.isEmpty()){
+            return null;
+        }
+        return lastExam;
     }
 
     public double averageScoreByRut(String rut){
