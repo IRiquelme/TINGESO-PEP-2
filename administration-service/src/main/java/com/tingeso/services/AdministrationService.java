@@ -26,7 +26,7 @@ public class AdministrationService {
 
     private List<StudentModel> restGetStudents() {
         return restTemplate.exchange(
-                "http://student-service/student",
+                "http://localhost:8080/student",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<StudentModel>>() {}
@@ -35,7 +35,7 @@ public class AdministrationService {
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut,
+                "http://localhost:8080/installment/" + rut,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -45,7 +45,7 @@ public class AdministrationService {
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut + "/unpaid",
+                "http://localhost:8080/installment/" + rut + "/unpaid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -77,7 +77,7 @@ public class AdministrationService {
                     installment.setAmount(newAmount);
                 }
             });
-            restTemplate.postForObject("http://installment-service/installment/update", studentInstallments, String.class);
+            restTemplate.postForObject("http://localhost:8080/installment/update", studentInstallments, String.class);
         });
         return "Cuotas actualizadas";
     }

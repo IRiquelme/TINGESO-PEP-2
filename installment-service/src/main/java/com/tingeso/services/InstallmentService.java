@@ -23,7 +23,7 @@ public class InstallmentService {
     RestTemplate restTemplate;
 
     private StudentModel restGetStudent(String rut) {
-        return restTemplate.exchange("http://student-service/student/" + rut,
+        return restTemplate.exchange("http://localhost:8080/student/" + rut,
                 HttpMethod.GET,
                 null,
                 StudentModel.class)

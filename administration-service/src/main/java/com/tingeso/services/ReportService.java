@@ -24,7 +24,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut,
+                "http://localhost:8080/installment/" + rut,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -33,7 +33,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetPaidInstallment(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut + "/paid",
+                "http://localhost:8080/installment/" + rut + "/paid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -42,7 +42,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut + "/unpaid",
+                "http://localhost:8080/installment/" + rut + "/unpaid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -51,7 +51,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetLateInstallment(String rut) {
         return restTemplate.exchange(
-                "http://installment-service/installment/" + rut + "/late",
+                "http://localhost:8080/installment/" + rut + "/late",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<InstallmentModel>>() {}
@@ -59,7 +59,7 @@ public class ReportService {
     }
 
     private LocalDate restGetLastPaidInstallment (String rut) {
-        InstallmentModel installment = restTemplate.getForObject("http://installment-service/installment/" + rut + "/last", InstallmentModel.class);
+        InstallmentModel installment = restTemplate.getForObject("http://localhost:8080/installment/" + rut + "/last", InstallmentModel.class);
         if (installment != null) {
             return installment.getPayDate();
         }
@@ -67,7 +67,7 @@ public class ReportService {
     }
 
     private String restGetPaymentType (String rut) {
-        return restTemplate.getForObject("http://installment-service/installment/" + rut + "/payment", String.class);
+        return restTemplate.getForObject("http://localhost:8080/installment/" + rut + "/payment", String.class);
     }
 
     public List<ReportModel> createReport(List<StudentModel> studentList){
