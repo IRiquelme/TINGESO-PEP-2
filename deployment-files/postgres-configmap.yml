@@ -5,10 +5,10 @@ metadata:
   labels:
     app: postgres-config-map
 data:
-  DB_HOST: postgres
-  
-  DB_STUDENT_NAME: student_db
+  POSTGRES_DB_HOST: postgres
 
-  DB_INSTALLMENT_NAME: installment_db
-  
-  DB_ADMINISTRATION_NAME: administration_db
+  POSTGRES_DB_ADMINISTRATION: administration_db
+
+  POSTGRES_DB_INSTALLMENT: installment_db
+
+  POSTGRES_DB_STUDENT: student_db
