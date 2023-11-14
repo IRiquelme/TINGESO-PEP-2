@@ -138,7 +138,7 @@ public class InstallmentService {
 
     private StudentModel restGetStudent(String rut) {
         ResponseEntity<StudentModel> response = restTemplate.exchange(
-                "http://localhost:8080/student/" + rut,
+                "http://gateway-service:8080/student/" + rut,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {

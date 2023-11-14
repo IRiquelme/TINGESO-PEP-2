@@ -1,0 +1,15 @@
+kubectl apply -f postgres-secrets.yml
+kubectl apply -f postgres-configmap.yml
+kubectl apply -f postgres-deployment+.yml
+kubectl get pods
+kubectl exec -it <pod-name> bash -- psql -h postgres -U postgres
+kubectl apply -f frontend-deployment+.yml
+kubectl apply -f config-deployment+.yml
+kubectl apply -f eureka-deployment+.yml
+kubectl apply -f student-deployment+.yml
+kubectl apply -f installment-deployment+.yml
+kubectl apply -f administration-deployment+.yml
+kubectl apply -f gateway-deployment+.yml
+
+minikube service frontend
+minikube tunnel

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface InstallmentRepository extends JpaRepository<InstallmentEntity, String> {
 
-    InstallmentEntity findById(long id);
+    InstallmentEntity findById(int id);
 
     @Query(value = "SELECT * FROM installment WHERE installment.rut = :rut ORDER BY installment.installment_number", nativeQuery = true)
     List<InstallmentEntity> findByRut(@Param("rut") String rut);

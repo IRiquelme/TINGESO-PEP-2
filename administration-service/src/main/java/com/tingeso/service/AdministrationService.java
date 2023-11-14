@@ -29,7 +29,7 @@ public class AdministrationService {
 
     private List<StudentModel> restGetStudents() {
         ResponseEntity<List<StudentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/student",
+                "http://gateway-service:8080/student",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -40,7 +40,7 @@ public class AdministrationService {
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut,
+                "http://gateway-service:8080/installment/" + rut,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -51,7 +51,7 @@ public class AdministrationService {
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/unpaid",
+                "http://gateway-service:8080/installment/" + rut + "/unpaid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -85,7 +85,7 @@ public class AdministrationService {
                     installment.setAmount(newAmount);
                 }
             });
-            restTemplate.postForObject("http://localhost:8080/installment/update", studentInstallments, String.class);
+            restTemplate.postForObject("http://gateway-service:8080/installment/update", studentInstallments, String.class);
         });
         return "Cuotas actualizadas";
     }

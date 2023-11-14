@@ -25,7 +25,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetInstallmentsByRut(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut,
+                "http://gateway-service:8080/installment/" + rut,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -36,7 +36,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetPaidInstallment(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/paid",
+                "http://gateway-service:8080/installment/" + rut + "/paid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -47,7 +47,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetUnpaidInstallment(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/unpaid",
+                "http://gateway-service:8080/installment/" + rut + "/unpaid",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -58,7 +58,7 @@ public class ReportService {
 
     private List<InstallmentModel> restGetLateInstallment(String rut) {
         ResponseEntity<List<InstallmentModel>> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/late",
+                "http://gateway-service:8080/installment/" + rut + "/late",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -69,7 +69,7 @@ public class ReportService {
 
     private LocalDate restGetLastPaidInstallment (String rut) {
         ResponseEntity<InstallmentModel> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/last",
+                "http://gateway-service:8080/installment/" + rut + "/last",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -84,7 +84,7 @@ public class ReportService {
 
     private String restGetPaymentType (String rut) {
         ResponseEntity<String> response = restTemplate.exchange(
-                "http://localhost:8080/installment/" + rut + "/payment",
+                "http://gateway-service:8080/installment/" + rut + "/payment",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {

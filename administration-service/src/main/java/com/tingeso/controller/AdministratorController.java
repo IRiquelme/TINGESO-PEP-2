@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/administrator")
+@RequestMapping("/administration")
 public class AdministratorController {
     @Autowired
     AdministrationService administrationService;
