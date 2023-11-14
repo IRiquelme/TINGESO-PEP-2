@@ -1,3 +1,6 @@
+minikube status
+minikube start
+
 kubectl apply -f postgres-secrets.yml
 kubectl apply -f postgres-configmap.yml
 kubectl apply -f postgres-deployment+.yml
